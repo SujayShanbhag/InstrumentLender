@@ -1,14 +1,13 @@
-package com.courage.instrumentlender
+package com.courage.instrumentlender.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
+import com.courage.instrumentlender.R
 import com.courage.instrumentlender.fragment.AccountFragment
 import com.courage.instrumentlender.fragment.AddFragment
 import com.courage.instrumentlender.fragment.CartFragment
 import com.courage.instrumentlender.fragment.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
 
