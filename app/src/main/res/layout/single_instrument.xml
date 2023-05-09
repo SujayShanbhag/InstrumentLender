@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/favBookItem"
+    android:id="@+id/instrumentItem"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,46 +16,25 @@
         android:layout_marginBottom="10dp"/>
     <TextView
         android:id="@+id/instrumentName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="guitar"
-        android:padding="5dp"
-        android:maxLines="1"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/instrumentImg" />
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2"
-        android:layout_below="@id/instrumentName">
-        <TextView
-            android:id="@+id/instrumentPrice"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="500"
-            android:padding="5dp"
-            android:maxLines="1"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true" />
-        <TextView
-            android:id="@+id/bookRating"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="5⭐"
-            android:padding="5dp"
-            android:maxLines="1"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true" />
-    </LinearLayout>
+        android:text="guitar"
+        android:paddingLeft="5dp"
+        android:maxLines="1"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_below="@id/instrumentPrice" />
+
+    <TextView
+        android:id="@+id/instrumentPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="500"
+        android:paddingLeft="5dp"
+        android:maxLines="1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_below="@+id/instrumentImg" />
 
 </RelativeLayout>

@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
                     transaction.replace(R.id.frameLayout, AccountFragment())
                     transaction.commit()
                 }
-
             }
             return@setOnItemSelectedListener true
         }
