@@ -1,11 +1,20 @@
 package com.courage.instrumentlender.fragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.courage.instrumentlender.R
+import com.courage.instrumentlender.adapter.InstrumentAdapter
+import com.courage.instrumentlender.model.Instrument
+import java.text.SimpleDateFormat
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,12 +39,48 @@ class HomeFragment : Fragment() {
         }
     }
 
+    lateinit var recyclerHome : RecyclerView
+    lateinit var layoutManager : LayoutManager
+    lateinit var recyclerAdapter : InstrumentAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view= inflater.inflate(R.layout.fragment_home, container, false)
+
+        recyclerHome=view.findViewById(R.id.recyclerHome)
+        layoutManager= GridLayoutManager(activity as Context,2)
+
+
+
+        val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+
+        // Create a string representing the desired date
+        val dateString = "10-05-2023"
+        val toDate="20-05-2023"
+            // Parse the string into a Date object using the custom format
+        val date = dateFormat.parse(dateString)
+        val lastDate=dateFormat.parse(toDate)
+        val instrumentObject=Instrument(1,"Grail","6000",
+            "An Acoustic guitar","9986441734",date,lastDate,
+            "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1392344536l/366522.jpg")
+
+        val instrumentList= arrayListOf<Instrument>(instrumentObject)
+
+
+        recyclerAdapter= InstrumentAdapter(activity as Context,instrumentList)
+        recyclerHome.adapter=recyclerAdapter
+        recyclerHome.layoutManager=layoutManager
+
+        recyclerHome.addItemDecoration(
+            DividerItemDecoration(
+                recyclerHome.context,
+                (layoutManager as GridLayoutManager).orientation
+            )
+        )
+
+        return view
     }
 
     companion object {

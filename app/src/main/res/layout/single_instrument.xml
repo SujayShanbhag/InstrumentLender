@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    android:id="@+id/instrumentItem"
+<androidx.cardview.widget.CardView android:id="@+id/instrumentItem"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="6dp">
+    android:padding="6dp"
+    android:elevation="18dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
     <ImageView
         android:id="@+id/instrumentImg"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/img"
-        android:layout_centerHorizontal="true"
+        android:src="@drawable/default_instrument_img"
         android:padding="10dp"
         android:layout_marginBottom="10dp"/>
     <TextView
@@ -36,5 +39,5 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_below="@+id/instrumentImg" />
-
-</RelativeLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
