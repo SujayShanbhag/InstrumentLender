@@ -73,12 +73,7 @@ class HomeFragment : Fragment() {
         recyclerHome.adapter=recyclerAdapter
         recyclerHome.layoutManager=layoutManager
 
-        recyclerHome.addItemDecoration(
-            DividerItemDecoration(
-                recyclerHome.context,
-                (layoutManager as GridLayoutManager).orientation
-            )
-        )
+
 
         return view
     }
