@@ -1,10 +1,16 @@
 package com.courage.instrumentlender
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import com.courage.instrumentlender.activity.DescriptionActivity
+import com.courage.instrumentlender.activity.MainActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +27,11 @@ class LoginFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var signupText : TextView
+    lateinit var btn_login : Button
+    lateinit var et_user_name : EditText
+    lateinit var et_password : EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,7 +45,30 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        val view= inflater.inflate(R.layout.fragment_login, container, false)
+
+        signupText=view.findViewById(R.id.signupText)
+        btn_login=view.findViewById(R.id.btn_login)
+        et_user_name=view.findViewById(R.id.et_user_name)
+        et_password=view.findViewById(R.id.et_password)
+
+        val map=HashMap<String,String>()
+        map.put("admin","123")
+
+        signupText.setOnClickListener {
+            val transaction= parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.frameLayout, SignupFragment())
+            transaction.commit()
+        }
+        btn_login.setOnClickListener {
+            val usr=et_user_name.text.toString()
+            val pass=et_password.text.toString()
+            if(map[usr]==pass){
+                val intent= Intent(context, MainActivity::class.java)
+                requireContext().startActivity(intent)
+            }
+        }
+        return view
     }
 
     companion object {

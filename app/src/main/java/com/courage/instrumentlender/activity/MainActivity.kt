@@ -3,7 +3,6 @@ package com.courage.instrumentlender.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.courage.instrumentlender.R
-import com.courage.instrumentlender.fragment.AccountFragment
 import com.courage.instrumentlender.fragment.AddFragment
 import com.courage.instrumentlender.fragment.CartFragment
 import com.courage.instrumentlender.fragment.HomeFragment
@@ -18,10 +17,17 @@ class MainActivity : AppCompatActivity() {
 
         navigationView=findViewById(R.id.navbar)
 
-        val transaction=supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.frameLayout, HomeFragment())
-        //navigationView.setCheckedItem(R.id.navHome)
-        transaction.commit()
+        if (intent!=null && intent.getIntExtra("instrument_id",-1)!=-1) {
+            val instrumentId=intent.getIntExtra("instrument_id",-1)
+            val transaction=supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frameLayout, CartFragment(instrumentId))
+            transaction.commit()
+        }
+        else {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.frameLayout, HomeFragment())
+            transaction.commit()
+        }
         navigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.navHome -> {
@@ -36,16 +42,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.navShop -> {
                     val transaction=supportFragmentManager.beginTransaction()
-                    transaction.replace(R.id.frameLayout, CartFragment())
-                    transaction.commit()
-                }
-                R.id.navProfile -> {
-                    val transaction=supportFragmentManager.beginTransaction()
-                    transaction.replace(R.id.frameLayout, AccountFragment())
+                    transaction.replace(R.id.frameLayout, CartFragment(-1))
                     transaction.commit()
                 }
             }
             return@setOnItemSelectedListener true
         }
+
     }
 }

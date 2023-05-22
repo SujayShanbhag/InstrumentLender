@@ -35,9 +35,26 @@ class InstrumentAdapter(val context : Context,val itemList : ArrayList<Instrumen
         val instrument=itemList[position]
         holder.instrumentName.text=instrument.instrumentName
         holder.instrumentPrice.text=instrument.instrumentPrice
-        Picasso.get().load(instrument.instrumentImg).error(R.drawable.default_instrument_img).into(holder.instrumentImg)
+        holder.instrumentImg.setImageResource(
+            if (instrument.instrumentImg == "guitar")
+                R.drawable.guitar
+            else if (instrument.instrumentImg == "piano")
+                R.drawable.piano
+            else if (instrument.instrumentImg == "drums")
+                R.drawable.drums
+            else if (instrument.instrumentImg == "violin")
+                R.drawable.violin
+            else if (instrument.instrumentImg == "electric_guitar")
+                R.drawable.electric_guitar
+            else if (instrument.instrumentImg == "harmonium")
+                R.drawable.harmonium
+            else if (instrument.instrumentImg == "flute")
+                R.drawable.flute
+            else
+                R.drawable.default_instrument_img
+        )
 
-        //old code -> holder.item.setOnClickListener {
+        //holder.item.setOnClickListener {
         holder.itemView.setOnClickListener {
             val intent= Intent(context, DescriptionActivity::class.java)
             intent.putExtra("instrument_id",instrument.instrumentId)

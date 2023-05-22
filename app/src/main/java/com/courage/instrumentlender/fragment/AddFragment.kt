@@ -1,10 +1,16 @@
 package com.courage.instrumentlender.fragment
 
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.Toast
 import com.courage.instrumentlender.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,6 +28,9 @@ class AddFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var uploadImage : ImageView
+    lateinit var btnAddInstrument : Button
+    private final val galleryRequestCode=1000
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -35,8 +44,34 @@ class AddFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add, container, false)
+        val view= inflater.inflate(R.layout.fragment_add, container, false)
+
+        uploadImage=view.findViewById(R.id.uploadImage)
+        btnAddInstrument=view.findViewById<Button>(R.id.btnAddInstrument)
+
+        btnAddInstrument.setOnClickListener {
+            Toast.makeText(context,"Something went wrong",Toast.LENGTH_SHORT).show()
+        }
+
+        uploadImage.setOnClickListener{
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            startActivityForResult(intent,galleryRequestCode )
+        }
+
+
+
+        return view
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode== galleryRequestCode && resultCode==RESULT_OK){
+            uploadImage.setImageURI(data?.data)
+        }
+    }
+
+
 
     companion object {
         /**

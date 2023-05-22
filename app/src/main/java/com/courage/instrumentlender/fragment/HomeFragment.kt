@@ -59,26 +59,52 @@ class HomeFragment : Fragment() {
         // Create a string representing the desired date
         val dateString = "10-05-2023"
         val toDate="20-05-2023"
-            // Parse the string into a Date object using the custom format
+        // Parse the string into a Date object using the custom format
         val date = dateFormat.parse(dateString)
         val lastDate=dateFormat.parse(toDate)
-        val instrumentObject=Instrument(1,"Grail","6000",
-            "An Acoustic guitar","9986441734",date,lastDate,
-            "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1392344536l/366522.jpg")
 
-        val instrumentList= arrayListOf<Instrument>(instrumentObject)
+        var instrumentObject= Instrument(0,"Grail","6000",
+            "An Acoustic guitar","Sujay","9986441734",date,lastDate,
+            "guitar")
+
+        val instrumentList= arrayListOf<Instrument>()
+        instrumentList.add(instrumentObject)
+        instrumentObject= Instrument(1,"yamaha","1100",
+            "An electric piano","akshay","9380036809",date,lastDate,
+            "piano")
+        instrumentList.add(instrumentObject)
+
+        instrumentObject= Instrument(2,"Bansuri","700",
+            "An Indian flute","Akash","9449119083",date,lastDate,
+            "flute")
+        instrumentList.add(instrumentObject)
+
+        instrumentObject= Instrument(3,"Premium ","1200",
+            "An Indian premium Harmonium ","Madhu","9480189653",date,lastDate,
+            "harmonium")
+        instrumentList.add(instrumentObject)
+        instrumentObject= Instrument(4,"gigmaker","1500",
+            "Drum Sets-Acoustic Drums","Ashruf","7348914120",date,lastDate,
+            "drums")
+        instrumentList.add(instrumentObject)
+
+        instrumentObject= Instrument(5,"ibanez GRX20Z ","1100",
+            "A GIO Series Electric Guitar (Black Night)","Dhiren","7624801511",date,lastDate,
+            "electric_guitar")
+        instrumentList.add(instrumentObject)
+
+        instrumentObject= Instrument(6,"maple","900",
+            "A German violin","pooja","9380037809",date,lastDate,
+            "violin")
+        instrumentList.add(instrumentObject)
+
 
 
         recyclerAdapter= InstrumentAdapter(activity as Context,instrumentList)
         recyclerHome.adapter=recyclerAdapter
         recyclerHome.layoutManager=layoutManager
 
-        recyclerHome.addItemDecoration(
-            DividerItemDecoration(
-                recyclerHome.context,
-                (layoutManager as GridLayoutManager).orientation
-            )
-        )
+
 
         return view
     }

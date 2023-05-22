@@ -1,10 +1,15 @@
 package com.courage.instrumentlender
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import com.courage.instrumentlender.activity.MainActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +26,10 @@ class SignupFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var enter_user_name : EditText
+    lateinit var enter_password : EditText
+    lateinit var re_password : EditText
+    lateinit var btn_signup : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,7 +43,26 @@ class SignupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_signup, container, false)
+        val view= inflater.inflate(R.layout.fragment_signup, container, false)
+
+        enter_user_name=view.findViewById(R.id.enter_user_name)
+        enter_password=view.findViewById(R.id.enter_password)
+        re_password=view.findViewById(R.id.re_password)
+        btn_signup=view.findViewById(R.id.btn_signup)
+
+        btn_signup.setOnClickListener {
+            val pass=enter_password.text.toString()
+            val checkPass=re_password.text.toString()
+            if(pass==checkPass){
+                val intent= Intent(context, MainActivity::class.java)
+                requireContext().startActivity(intent)
+            }
+            else {
+                Toast.makeText(context,"Passwords not matching",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        return view
     }
 
     companion object {
